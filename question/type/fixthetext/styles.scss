@@ -1,0 +1,64 @@
+$change-color: #faa;
+$copy-color: #afa;
+
+.que.fixthetext {
+  textarea {
+    padding: 0.3em;
+    width: 80%;
+    font-family: monospace;
+  }
+
+  .specificfeedback {
+    .diff {
+      background-color: #eee;
+
+      span {
+        &.add,
+        &.change,
+        &.delete {
+	        background-color: $change-color;
+        }
+
+        // &.copy {}
+      }
+
+      table {
+        &.headers,
+        &.add,
+        &.copy,
+        &.change,
+        &.delete {
+	        float: left;
+	        vertical-align: bottom;
+	        white-space: pre-nowrap;
+	        margin-top: 1em;
+        }
+
+        &.headers {
+          td {
+            font-weight: bold;
+            padding-right: 1em;
+          }
+        }
+
+        &.copy td.final {
+	        background-color: $copy-color;
+        }
+
+        &.add,
+        &.change,
+        &.delete {
+          td.final {
+	          background-color: $change-color;
+          }
+        }
+
+        th,
+        td {
+	        white-space: nowrap;
+	        padding: 0 0.2em;
+        }
+      }
+    }
+  }
+}

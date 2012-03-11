@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="question/type/fixthetext/db" VERSION="20090305" COMMENT="XMLDB file for Moodle question/type/fixthetext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="question_fixthetext" COMMENT="Options for fix the text questions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="questionid"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Foreign key references question.id." PREVIOUS="id" NEXT="correct_text"/>
+        <FIELD NAME="correct_text" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" COMMENT="Information shown to people with permission to manually grade the question, when they are grading." PREVIOUS="questionid" NEXT="initial_text"/>
+        <FIELD NAME="initial_text" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" COMMENT="Information shown to people with permission to manually grade the question, when they are grading." PREVIOUS="correct_text" NEXT="evaluate_verbosity_level"/>
+        <FIELD NAME="evaluate_verbosity_level" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="The text format for graderinfo." PREVIOUS="initial_text"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="questionid"/>
+        <KEY NAME="questionid" TYPE="foreign" FIELDS="questionid" REFTABLE="question" REFFIELDS="id" PREVIOUS="primary"/>
+      </KEYS>
+		</TABLE>
+  </TABLES>
+</XMLDB>

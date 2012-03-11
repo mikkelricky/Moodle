@@ -1,0 +1,24 @@
+.que.fixthetext textarea {
+  padding: 0.3em;
+  width: 80%;
+  font-family: monospace; }
+.que.fixthetext .specificfeedback .diff {
+  background-color: #eee; }
+  .que.fixthetext .specificfeedback .diff span.add, .que.fixthetext .specificfeedback .diff span.change, .que.fixthetext .specificfeedback .diff span.delete {
+    background-color: #ffaaaa; }
+  .que.fixthetext .specificfeedback .diff table.headers, .que.fixthetext .specificfeedback .diff table.add, .que.fixthetext .specificfeedback .diff table.copy, .que.fixthetext .specificfeedback .diff table.change, .que.fixthetext .specificfeedback .diff table.delete {
+    float: left;
+    vertical-align: bottom;
+    white-space: pre-nowrap;
+    margin-top: 1em; }
+  .que.fixthetext .specificfeedback .diff table.headers td {
+    font-weight: bold;
+    padding-right: 1em; }
+  .que.fixthetext .specificfeedback .diff table.copy td.final {
+    background-color: #aaffaa; }
+  .que.fixthetext .specificfeedback .diff table.add td.final, .que.fixthetext .specificfeedback .diff table.change td.final, .que.fixthetext .specificfeedback .diff table.delete td.final {
+    background-color: #ffaaaa; }
+  .que.fixthetext .specificfeedback .diff table th,
+  .que.fixthetext .specificfeedback .diff table td {
+    white-space: nowrap;
+    padding: 0 0.2em; }
