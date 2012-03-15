@@ -102,9 +102,6 @@ class qtype_fixthetext_processor {
 				$index += 1;
 			}
 
-// 			debug(array('index' => $textIndex,
-// 									'indexes' => $alternativeIndexes), __METHOD__);
-
 			$alternativeIndex = 0;
 			foreach ($tokens as $token) {
 				if (is_array($token)) {
@@ -116,10 +113,6 @@ class qtype_fixthetext_processor {
 			}
 			$texts[] = $text;
 		}
-
-		// debug(array($tokens, $texts), __METHOD__);
-
-		// debug_die($texts);
 
 		return $texts;
 	}

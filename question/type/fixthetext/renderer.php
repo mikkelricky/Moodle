@@ -4,7 +4,7 @@
  *
  * @package    qtype
  * @subpackage fixthetext
- * @copyright  2009 The Open University
+ * @copyright  2012 Mikkel Ricky
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -13,7 +13,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Generates the output for fix the text questions.
  *
- * @copyright  2009 The Open University
+ * @copyright  2012 Mikkel Ricky
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qtype_fixthetext_renderer extends qtype_renderer {
@@ -44,37 +44,10 @@ class qtype_fixthetext_renderer extends qtype_renderer {
 		 	$feedbackimg = $this->feedback_image($fraction);
 		}
 
-		// $questiontext = $question->format_questiontext($qa);
-		// $placeholder = false;
-		// if (preg_match('/_____+/', $questiontext, $matches)) {
-		// 	$placeholder = $matches[0];
-		// 	$inputattributes['size'] = round(strlen($placeholder) * 1.1);
-		// }
-
 		$content = $currentanswer ? $currentanswer : $question->get_initial_text();
 		$input = html_writer::tag('textarea', $content, $inputattributes).$feedbackimg;
 
-		// if ($placeholder) {
-		// 	$questiontext = substr_replace($questiontext, $input,
-		// 																 strpos($questiontext, $placeholder), strlen($placeholder));
-		// }
-
 		$result = html_writer::tag('div', $input, array('class' => 'qtext'));
-
-		// if (!$placeholder) {
-		// 	$result .= html_writer::start_tag('div', array('class' => 'ablock'));
-		// 	$result .= get_string('answer', 'qtype_fixthetext',
-		// 												html_writer::tag('div', $input, array('class' => 'answer')));
-		// 	$result .= html_writer::end_tag('div');
-		// }
-
-		// debug($qa->get_state());
-
-		// if ($qa->get_state() == question_state::$invalid) {
-		// 	$result .= html_writer::nonempty_tag('div',
-		// 																			 $question->get_validation_error(array('answer' => $currentanswer)),
-		// 																			 array('class' => 'validationerror'));
-		// }
 
 		return $result;
 	}

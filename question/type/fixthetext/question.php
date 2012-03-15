@@ -25,18 +25,15 @@ question_graded_automatically // implements question_grading_strategy
 	public $initial_text;
 
 	public function __construct() {
-		spl_autoload_register(array($this, '__autoload'));
-	// 	parent::__construct(new question_first_matching_answer_grading_strategy($this));
+		spl_autoload_register(array($this, 'autoload'));
 	}
 
-	private function __autoload($classname) {
+	private function autoload($classname) {
 		$classfile = str_replace('_', '/', $classname).'.php';
-		require_once $classfile;
+		include_once $classfile;
 	}
 
 	public function get_expected_data() {
-		debug(func_get_args());
-
 		return array('answer' => PARAM_RAW_TRIMMED);
 	}
 
@@ -44,8 +41,6 @@ question_graded_automatically // implements question_grading_strategy
 	public function apply_attempt_state(question_attempt_step $step) {}
 
 	public function summarise_response(array $response) {
-		debug(func_get_args());
-
 		if (isset($response['answer'])) {
 			return $response['answer'];
 		} else {
@@ -54,15 +49,11 @@ question_graded_automatically // implements question_grading_strategy
 	}
 
 	public function is_gradable_response(array $response) {
-		debug(func_get_args());
-
 		return array_key_exists('answer', $response) &&
 			$response['answer'];
 	}
 
 	public function is_complete_response(array $response) {
-		debug(func_get_args());
-
 		if (!$this->is_gradable_response($response)) {
 			return false;
 		}
@@ -71,8 +62,6 @@ question_graded_automatically // implements question_grading_strategy
 	}
 
 	public function get_validation_error(array $response) {
-		debug(func_get_args());
-
 		if (!$this->is_gradable_response($response)) {
 			return get_string('pleaseenterananswer', 'qtype_fixthetext');
 		}
@@ -81,8 +70,6 @@ question_graded_automatically // implements question_grading_strategy
 	}
 
 	public function is_same_response(array $prevresponse, array $newresponse) {
-		debug(func_get_args());
-
 		if (!question_utils::arrays_same_at_key_missing_is_blank(
 																														 $prevresponse, $newresponse, 'answer')) {
 			return false;
@@ -92,8 +79,6 @@ question_graded_automatically // implements question_grading_strategy
 	}
 
 	public function get_correct_response() {
-		debug(func_get_args());
-
 		$answer = $this->get_correct_answer();
 		if (!$answer) {
 			return array();
@@ -152,8 +137,6 @@ question_graded_automatically // implements question_grading_strategy
 	}
 
 	public function grade_response(array $response) {
-		debug(func_get_args());
-
 		$answer = $this->get_matching_answer($response);
 		if (!$answer) {
 			return array(0, question_state::$gradedwrong);
@@ -162,9 +145,7 @@ question_graded_automatically // implements question_grading_strategy
 		return array($answer->fraction, question_state::graded_state_for_fraction($answer->fraction));
 	}
 
-	// public function grade(array $response) {
-	// 	debug(func_get_args());
-	// }
+	// public function grade(array $response) {}
 
 	private function computeScore(array $response) {
 		$answer = $response['answer'];
@@ -219,15 +200,9 @@ question_graded_automatically // implements question_grading_strategy
 			}
 		}
 
-// 		debug(array('maximumScore' => $maximumScore,
-// 								'actualScore' => $actualScore), __METHOD__.':'.__LINE__);
-
 		if ($actualScore < 0) {
 			$actualScore = 0;
 		}
-
-// 		debug($actualScore, __METHOD__);
-// 		debug($diff, __METHOD__);
 
 		return ($maximumScore > 0) ? $actualScore/$maximumScore : 0;
 	}

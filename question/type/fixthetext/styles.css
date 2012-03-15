@@ -22,3 +22,10 @@
   .que.fixthetext .specificfeedback .diff table td {
     white-space: nowrap;
     padding: 0 0.2em; }
+
+#page-question-type-fixthetext .error-message {
+  border: solid 2px #f00;
+  background: #ff0;
+  color: black;
+  font-weight: bold;
+  padding: 1em; }

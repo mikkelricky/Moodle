@@ -16,6 +16,10 @@
  */
 class qtype_fixthetext_edit_form extends question_edit_form {
 	protected function definition_inner($mform) {
+		if (!$this->checkRequirements($mform)) {
+			return;
+		}
+
 		$mform->addElement('textarea', 'correct_text',
 											 get_string('correct_text', 'qtype_fixthetext'),
 											 array('rows' => 10,
@@ -35,12 +39,30 @@ class qtype_fixthetext_edit_form extends question_edit_form {
 		$mform->addElement('select', 'evaluate_verbosity_level',
 											 get_string('evaluate_verbosity_level', 'qtype_fixthetext'), $menu);
 
-		// $mform->closeHeaderBefore('answersinstruct');
-
-		// $this->add_per_answer_fields($mform, get_string('answerno', 'qtype_fixthetext', '{no}'),
-		//         question_bank::fraction_options());
-
 		$this->add_interactive_settings();
+	}
+
+	private function checkRequirements($mform) {
+		include_once 'Horde/Text/Diff.php';
+		if (
+				true ||
+				!class_exists('Horde_Text_Diff')) {
+			$message = html_writer::tag('p',
+																	'Class \'Horde_Text_Diff\' does not exist.')
+				.html_writer::tag('p',
+													'See '
+													.html_writer::tag('a', 'http://www.horde.org/libraries/Horde_Text_Diff/download', array('href' => 'http://www.horde.org/libraries/Horde_Text_Diff/download',
+																																																									'target' => '_blank'))
+													.' for details on installing it.');
+			$mform->addElement('static',
+												 'missing_horde_text_diff',
+												 null,
+												 html_writer::tag('div', $message, array('class' => 'error-message missing-requirement'))
+												 );
+			return false;
+		}
+
+		return true;
 	}
 
 	protected function data_preprocessing($question) {
